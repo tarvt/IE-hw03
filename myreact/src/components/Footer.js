@@ -3,11 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+  root: {
+        margin:'30px auto',
+        display: 'flex',
         left: '0',
         bottom: '0',
         width: '100%',
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         zIndex: '9',
         justifyContent: 'center',
         alignItems: 'center',

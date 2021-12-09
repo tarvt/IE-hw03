@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board';
-import { ThemeProvider } from '@material-ui/styles';
-import  theme  from './theme';
+import Button from '@mui/material/Button';
 export default class Game extends Component {
     
 
@@ -51,9 +50,9 @@ export default class Game extends Component {
             const desc = move ? 'Go to #' + move : 'Start the Game';
             return (
                 <li key={move}>
-                    <button onClick={() => { this.jumpTo(move) }}>
+                    <Button variant="contained" onClick={() => { this.jumpTo(move) }}>
                         {desc}
-                    </button>
+                    </Button>
                 </li>
             )
         });
@@ -66,9 +65,8 @@ export default class Game extends Component {
 
         
         return (
-            <ThemeProvider theme={theme}>
+            
                 <div  className="game">
-                    
                 <div className="game-board">
                     <Board onClick={(i) => this.handleClick(i)}
                         squares={current.squares} />
@@ -80,7 +78,7 @@ export default class Game extends Component {
                 
 
                 </div>
-                </ThemeProvider>
+            
         )
     }
 }
