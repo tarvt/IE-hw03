@@ -8,6 +8,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 
 export default function Square(props) {
+
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("lg"));
   const tablet = useMediaQuery(theme.breakpoints.up("sm"));
@@ -24,11 +25,11 @@ export default function Square(props) {
   
   const handleIcon = (value) => {
     console.log("we here1");
-    if (value === 'X') {
+    if (value === 'O') {
       
       return <CircleOutlinedIcon />;
     }
-    else if (value === 'O') {
+    else if (value === 'X') {
       return <ClearOutlinedIcon />;
     }
     
@@ -36,9 +37,7 @@ export default function Square(props) {
   };
   
   return (
-      
     <div>
-      
         <Button style={sizes() } 
         onClick={props.onClick}
         startIcon={ handleIcon(props.value)}>
