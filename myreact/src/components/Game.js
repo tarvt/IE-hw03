@@ -1,8 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Board from './Board';
-
+import { ThemeProvider } from '@material-ui/styles';
+import  theme  from './theme';
 export default class Game extends Component {
+    
+
     constructor(props) {
+        
         super(props);
         this.state = {
             xIsNext: true,
@@ -37,8 +41,9 @@ export default class Game extends Component {
         });
 
     }
-
+    
     render() {
+        //const { classes } = this.props;
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
@@ -59,9 +64,11 @@ export default class Game extends Component {
             status = 'Next Player is ' + (this.state.xIsNext ? 'X' : 'O');
         }
 
-
+        
         return (
-            <div className="game">
+            <ThemeProvider theme={theme}>
+                <div  className="game">
+                    
                 <div className="game-board">
                     <Board onClick={(i) => this.handleClick(i)}
                         squares={current.squares} />
@@ -70,11 +77,14 @@ export default class Game extends Component {
                     <div>{status}</div>
                     <ul>{moves}</ul>
                 </div>
+                
 
-            </div>
+                </div>
+                </ThemeProvider>
         )
     }
 }
+
 
 function calculateWinner(squares) {
     const lines = [
