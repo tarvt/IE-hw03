@@ -28,7 +28,7 @@ function App() {
     <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <Header />
-      <Game />
+      <Game  />
       <Footer/>
     </div>
      </ThemeProvider>

@@ -1,31 +1,12 @@
 import React, { useReducer } from 'react';
 import Board from './Board';
-import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@mui/material/Alert';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 
-
-
-const useStyles = makeStyles((theme) => ({
-  game: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: '60%',
-    display: 'flex',
-    margin:'0px auto',
-    border: '2px solid black',
-    padding:'20px',
-    flexDirection:'row',    
-  },
-  gameinfo: {
-    marginLeft:'20px',
-  }
-
-  
-}));
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -49,7 +30,37 @@ const reducer = (state, action) => {
 };
 
 export default function Game() {
-  const classes = useStyles();
+  // defining sizes for making the website responsive
+  const theme = useTheme();
+    const desktop = useMediaQuery(theme.breakpoints.up("lg"));
+    const tablet = useMediaQuery(theme.breakpoints.up("sm"));
+    const mobile = useMediaQuery(theme.breakpoints.up("xs"));
+    const styleGame = () => {
+
+    if (desktop || tablet) return {backgroundColor:'white',
+    width: '60%',
+    margin: 'auto',
+    padding: '10px 12px',
+    display: 'flex',
+    justifycontent: 'space-between'};
+    if (mobile ) return {backgroundColor:'white',
+    width: '90%',
+    justifycontent: 'space-between'};
+  };
+    const styleSec = () => {
+    if (desktop ) return {width: '35%',
+    marginbottom: '5%',
+    textalign: 'left',
+    margin: 'auto',
+    padding:'10px 12px',
+    borderradius: '10px',};
+    if (mobile || tablet) return {backgroundColor:'white',
+      width: '75%',
+    margin: 'auto',
+    justifycontent: 'space-between'};
+  };
+
+  //
   const [state, dispatch] = useReducer(reducer, {
     xIsNext: true,
     history: [{ squares: Array(9).fill(null) }],
@@ -80,6 +91,7 @@ export default function Game() {
   const moves = history.map((step, move) => {
     const desc = move ? 'Go to #' + move : 'Start the Game';
     return (
+      
       <ListItem key={move} disablePadding>
         <ListItemButton style={ {backgroundColor:"#c2c8d1"}} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
       </ListItem>
@@ -88,16 +100,17 @@ export default function Game() {
   });
 
   return (
-    <div className={winner ? classes.game : classes.game }>
-      <div>
+    <div style={styleGame()}>
+      
+      <div style={styleSec()}>
         <Board
           onClick={(i) => handleClick(i)}
           squares={current.squares}
         ></Board>
       </div>
-      <div className={classes.gameinfo}>
+      <div style={styleSec()}>
         <Alert severity={winner ? "success" : "info"} >{status}</Alert>
-        <List>{moves}</List>
+        <List style={{}}>{moves}</List>
       </div>
     </div>
   );

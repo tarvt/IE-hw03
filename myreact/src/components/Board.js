@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Square from './Square';
 import Grid from '@material-ui/core/Grid';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Divider from '@mui/material/Divider';
 
+
 export default function Board(props) {
-    
+
     const renderSquare = (i) => {
         return <Square value={props.squares[i]}
         onClick={()=> props.onClick(i)}

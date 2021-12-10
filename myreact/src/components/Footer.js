@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         zIndex: '9',
         justifyContent: 'center',
-        alignItems: 'center',
+    alignItems: 'center',
+        
     },
   
 }));
