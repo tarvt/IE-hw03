@@ -1,6 +1,12 @@
 import React, { useReducer } from 'react';
 import Board from './Board';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@mui/material/Alert';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import List from '@mui/material/List';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,9 +80,10 @@ export default function Game() {
   const moves = history.map((step, move) => {
     const desc = move ? 'Go to #' + move : 'Start the Game';
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
-      </li>
+      <ListItem key={move} disablePadding>
+        <ListItemButton style={ {backgroundColor:"#c2c8d1"}} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
+      </ListItem>
+
     );
   });
 
@@ -89,8 +96,8 @@ export default function Game() {
         ></Board>
       </div>
       <div className={classes.gameinfo}>
-        <div>{status}</div>
-        <ul>{moves}</ul>
+        <Alert severity={winner ? "success" : "info"} >{status}</Alert>
+        <List>{moves}</List>
       </div>
     </div>
   );

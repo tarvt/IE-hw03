@@ -27,10 +27,10 @@ export default function Square(props) {
     console.log("we here1");
     if (value === 'O') {
       
-      return <CircleOutlinedIcon />;
+      return <CircleOutlinedIcon style={{ fontSize: 50 }}/>;
     }
     else if (value === 'X') {
-      return <ClearOutlinedIcon />;
+      return <ClearOutlinedIcon style={{ fontSize: 50 }}/>;
     }
     
     else return null;
