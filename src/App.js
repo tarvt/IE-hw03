@@ -1,8 +1,7 @@
 import './App.css';
-import Game from './components/Game';
-import Footer from './components/Footer';
+import Body from './components/Body';
 import {makeStyles} from '@material-ui/core/styles'
-import Header from './components/Header';
+
 import { createMuiTheme, ThemeProvider } from '@mui/material';
 
 const theme = createMuiTheme({
@@ -31,10 +30,8 @@ function App() {
   return (
     <div className={classes.root}>
     <ThemeProvider theme={theme}>
-    
-      <Header />
-      <Game  />
-      <Footer/>
+      <Body></Body>
+      
       </ThemeProvider>
       </div>
   );

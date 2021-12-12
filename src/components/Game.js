@@ -8,6 +8,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import Button from '@mui/material/Button';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,7 +32,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function Game() {
+export default function Game(props) {
   // defining sizes for making the website responsive
   const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up("lg"));
@@ -89,17 +91,19 @@ export default function Game() {
     ? winner === 'D'
       ? 'Draw'
       : 'Winner is ' + winner
-    : 'Next player is ' + (xIsNext ? 'X' : 'O');
-
+    : 'Next player is ' + (xIsNext ? props.player1 : props.player2 );
+// this functions fills in the list of privous moves
   const moves = history.map((step, move) => {
-    const desc = move ? 'Go to #' + move : 'Start the Game';
+    if (move > 0) { 
+    const desc = 'Go to move #' + move;
     return (
       
       <ListItem key={move} disablePadding>
-        <ListItemButton style={ {backgroundColor:"#c2c8d1"}} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
+        <ListItemButton style={{ backgroundColor: "#c2c8d1" }} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
       </ListItem>
 
     );
+  }
   });
 
   return (
@@ -112,9 +116,9 @@ export default function Game() {
         ></Board>
       </div>
       <div style={styleSec()}>
-        
+        <Button style={{marginBottom:'10px'}} variant="contained" endIcon={<RestartAltIcon/>} onClick={() => jumpTo(0)}>restart</Button>
         <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
-        severity={winner ? "success" : "info"} >{status}</Alert>
+          severity={winner ? "success" : "info"} >{status}</Alert>
         <List style={{}}>{moves}</List>
       </div>
     </div>
