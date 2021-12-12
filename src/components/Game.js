@@ -6,7 +6,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import List from '@mui/material/List';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -39,25 +40,25 @@ export default function Game() {
 
     if (desktop || tablet) return {backgroundColor:'#d8e4fc',
     borderRadius: '10px!important',
-      width: '60%',
+    width: '60%',
     margin: 'auto',
     padding: '10px 12px',
     display: 'flex',
     justifycontent: 'space-between'};
-    if (mobile ) return {backgroundColor:'#d8e4fc',
-      width: '90%',
+    if (mobile) return {backgroundColor:'#d8e4fc',
+    width: '90%',
     margin: 'auto',
     justifycontent: 'space-between'};
   };
     const styleSec = () => {
-      if (desktop) return {
+    if (desktop) return {
     width: '35%',
     marginbottom: '5%',
     margin: 'auto',
     padding:'10px 12px',
     borderradius: '10px',};
     if (mobile || tablet) return {backgroundColor:'#d8e4fc',
-      width: '75%',
+    width: '75%',
     margin: 'auto',
     justifycontent: 'space-between'};
   };
@@ -111,7 +112,9 @@ export default function Game() {
         ></Board>
       </div>
       <div style={styleSec()}>
-        <Alert severity={winner ? "success" : "info"} >{status}</Alert>
+        
+        <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
+        severity={winner ? "success" : "info"} >{status}</Alert>
         <List style={{}}>{moves}</List>
       </div>
     </div>
