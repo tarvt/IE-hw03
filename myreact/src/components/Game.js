@@ -37,24 +37,26 @@ export default function Game() {
     const mobile = useMediaQuery(theme.breakpoints.up("xs"));
     const styleGame = () => {
 
-    if (desktop || tablet) return {backgroundColor:'white',
-    width: '60%',
+    if (desktop || tablet) return {backgroundColor:'#d8e4fc',
+    borderRadius: '10px!important',
+      width: '60%',
     margin: 'auto',
     padding: '10px 12px',
     display: 'flex',
     justifycontent: 'space-between'};
-    if (mobile ) return {backgroundColor:'white',
-    width: '90%',
+    if (mobile ) return {backgroundColor:'#d8e4fc',
+      width: '90%',
+    margin: 'auto',
     justifycontent: 'space-between'};
   };
     const styleSec = () => {
-    if (desktop ) return {width: '35%',
+      if (desktop) return {
+    width: '35%',
     marginbottom: '5%',
-    textalign: 'left',
     margin: 'auto',
     padding:'10px 12px',
     borderradius: '10px',};
-    if (mobile || tablet) return {backgroundColor:'white',
+    if (mobile || tablet) return {backgroundColor:'#d8e4fc',
       width: '75%',
     margin: 'auto',
     justifycontent: 'space-between'};

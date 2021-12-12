@@ -3,16 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+  root: {
+    borderRadius: '10px!important',
+        opacity: '60%',
         padding: '20px',
         width: '60%',
         margin:'30px auto',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Nunito',
-        backgroundColor: 'white',
-        border:'2px solid black'
+        backgroundColor: '#CCCCFF',
+        color : '#800080'
     },
   
 }));
@@ -21,7 +22,7 @@ export default function Header() {
   const classes = useStyles();
   return (
     <div className={classes.root} id="header">
-     <h1>Welcome to <br />tic toc toe game </h1>
+     <h1>Tic Toc Toe </h1>
     </div>
   );
 }
