@@ -4,12 +4,12 @@ import Header from './Header';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
         opacity: '60%', 
         margin:'30px auto',
-        display: 'flex',
         left: '0',
         bottom: '0',
         width: '60%',
@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         padding: '10px 12px',
         borderRadius: '10px!important',
-         marginbottom: '5%',
+        marginbottom: '5%',
+  },
+    textf: {
+      marginleft: '10%',
+      margin: '30px auto',
+      
+      backgroundColor: 'balck',
     }
   
 }));
@@ -53,14 +59,14 @@ export default function Body() {
         {clicked === true && (
         <Game player1={text1} player2={text2} />)}
         {clicked === false && (       <div className={classes.form}>
-        <TextField onChange={onTextChange1}  id="outlined-basic" label="Outlined" variant="outlined" />
-        <TextField onChange={onTextChange2} id="outlined-basic" label="Outlined" variant="outlined" />
-        <Button onClick={() => UpdateNames()} >Text</Button>
-              </div>
+        <TextField sx={{ m: 1 }} onChange={onTextChange1}  label="palyer1" variant="outlined" />
+        <TextField sx={{ m: 1 }} onChange={onTextChange2}  label="player2" variant="outlined" />
+        <Button size="small" onClick={() => UpdateNames()} endIcon={<PlayArrowIcon />} >start game</Button>
+        </div>
         )}
         </div>
     <div className={classes.footer} id="footer">
-     <p> made by Taravat Monsef <br />internet engineering exercise 3</p>
+     <p> made by Taravat Monsef </p><p>internet engineering exercise 3</p>
     </div>
     </div>
   );

@@ -10,6 +10,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Button from '@mui/material/Button';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -59,13 +60,18 @@ export default function Game(props) {
     margin: 'auto',
     padding:'10px 12px',
     borderradius: '10px',};
-    if (mobile || tablet) return {backgroundColor:'#d8e4fc',
-    width: '75%',
-    margin: 'auto',
-    justifycontent: 'space-between'};
+      if (mobile || tablet) return {
+        backgroundColor: '#d8e4fc',
+        marginbottom: '5%',
+        width: '75%',
+        margin: 'auto',
+        justifycontent: 'space-between'};
   };
 
-  //
+  //new game 
+  const newgame = () => {
+    window.location.reload();
+  };
   const [state, dispatch] = useReducer(reducer, {
     xIsNext: true,
     history: [{ squares: Array(9).fill(null) }],
@@ -116,7 +122,8 @@ export default function Game(props) {
         ></Board>
       </div>
       <div style={styleSec()}>
-        <Button style={{marginBottom:'10px'}} variant="contained" endIcon={<RestartAltIcon/>} onClick={() => jumpTo(0)}>restart</Button>
+        <Button sx={{ m: 1 }} style={{ marginBottom: '10px' }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
+        <Button sx={{ m: 1 }} style={{marginBottom:'10px'}} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
         <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
           severity={winner ? "success" : "info"} >{status}</Alert>
         <List style={{}}>{moves}</List>
