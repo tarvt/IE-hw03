@@ -9,12 +9,12 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const useStyles = makeStyles((theme) => ({
   footer: {
         opacity: '60%', 
-        margin:'30px auto',
+        margin: '30px auto',
+        padding: '20px',
+        textAlign: 'center',
         left: '0',
         bottom: '0',
         width: '60%',
-        backgroundColor: '#CCCCFF',
-        zIndex: '9',
         justifyContent: 'center',
         alignItems: 'center',
         
@@ -66,7 +66,7 @@ export default function Body() {
         )}
         </div>
     <div className={classes.footer} id="footer">
-     <p> made by Taravat Monsef </p><p>internet engineering exercise 3</p>
+     <p> Made by Taravat Monsef </p><p>Internet Engineering Exercise 3</p>
     </div>
     </div>
   );

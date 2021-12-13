@@ -11,6 +11,7 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Button from '@mui/material/Button';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import Box from '@mui/material/Box';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,14 +42,14 @@ export default function Game(props) {
     const mobile = useMediaQuery(theme.breakpoints.up("xs"));
     const styleGame = () => {
 
-    if (desktop || tablet) return {backgroundColor:'#d8e4fc',
+    if (desktop ) return {backgroundColor:'#d8e4fc',
     borderRadius: '10px!important',
     width: '60%',
     margin: 'auto',
     padding: '10px 12px',
     display: 'flex',
     justifycontent: 'space-between'};
-    if (mobile) return {backgroundColor:'#d8e4fc',
+    if (mobile || tablet ) return {backgroundColor:'#d8e4fc',
     width: '90%',
     margin: 'auto',
     justifycontent: 'space-between'};
@@ -56,13 +57,9 @@ export default function Game(props) {
     const styleSec = () => {
     if (desktop) return {
     width: '35%',
-    marginbottom: '5%',
     margin: 'auto',
-    padding:'10px 12px',
     borderradius: '10px',};
       if (mobile || tablet) return {
-        backgroundColor: '#d8e4fc',
-        marginbottom: '5%',
         width: '75%',
         margin: 'auto',
         justifycontent: 'space-between'};
@@ -113,22 +110,22 @@ export default function Game(props) {
   });
 
   return (
-    <div style={styleGame()}>
+    <Box style={styleGame()}>
       
-      <div style={styleSec()}>
+      <Box sx={{ p: 2 , m:2}} style={styleSec()}>
         <Board
           onClick={(i) => handleClick(i)}
           squares={current.squares}
         ></Board>
-      </div>
-      <div style={styleSec()}>
-        <Button sx={{ m: 1 }} style={{ marginBottom: '10px' }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
-        <Button sx={{ m: 1 }} style={{marginBottom:'10px'}} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
+      </Box>
+      <Box sx={{ p: 2 , m:2 }} style={styleSec()}>
+        <Button sx={{ m: 1 }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
+        <Button sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
         <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
           severity={winner ? "success" : "info"} >{status}</Alert>
         <List style={{}}>{moves}</List>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 const calculateWinner = (squares) => {

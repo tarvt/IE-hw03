@@ -1,9 +1,8 @@
 import React  from 'react';
 import Square from './Square';
 import Grid from '@material-ui/core/Grid';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Divider from '@mui/material/Divider';
-
+import Box from '@mui/material/Box';
 
 export default function Board(props) {
 
@@ -14,35 +13,34 @@ export default function Board(props) {
     }
     
     return (
-            <div>
-            <ButtonGroup variant="text" aria-label="text button group">
-                    <Grid item xs={4}> {renderSquare(0)}</Grid>
+        <Box sx={{width: 310,height: 310,'&:hover': {opacity: [0.9, 0.8, 0.7],},}}>
+            <Grid container spacing={0} columnSpacing={{ xs: 0, sm: 1, md: 2 }}>
+                    {renderSquare(0)}
                     <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                    <Grid item xs={4}>{renderSquare(1)}</Grid>
+                    {renderSquare(1)}
                     <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                     <Grid item xs={4}>{renderSquare(2)}</Grid>
-            </ButtonGroup>
-                <br />
+                   {renderSquare(2)}
+
+                
+            </Grid>
                 <Divider style={{ background: 'black' }} />
-            <ButtonGroup variant="text" aria-label="text button group">
-                    <Grid item xs={4}>{renderSquare(3)}</Grid>
-                    <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                    <Grid item xs={4}>{renderSquare(4)}</Grid>
-                    <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                    <Grid item xs={4}>{renderSquare(5)}</Grid>
+            <Grid container spacing={0}>
+                    {renderSquare(3)}
+                   <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
+                    {renderSquare(4)}
+                   <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
+                    {renderSquare(5)}
              
-                </ButtonGroup>
-                <br />
+                </Grid>
                 <Divider style={{ background: 'black' }} />
-                <ButtonGroup variant="text" aria-label="text button group">
-                    <Grid item xs={4}>{renderSquare(6)}</Grid>
+                <Grid container spacing={0} direction="row" >
+                    {renderSquare(6)}
+                   <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
+                    {renderSquare(7)}
                     <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                    <Grid item xs={4}>{renderSquare(7)}</Grid>
-                    <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
-                    <Grid item xs={4}>{renderSquare(8)}</Grid>
-              </ButtonGroup>
-            <br />
-            </div>
+                    {renderSquare(8)}
+              </Grid>
+            </Box>
 
             
         )
