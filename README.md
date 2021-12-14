@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation and Setup Instructions
 
-1)Check you have nodeinstalled by writing the following command:
+1)Check you have node installed, by writing the following command:
 
 ```bash
 node -- version
