@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import Container from '@mui/material/Container';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -42,7 +43,6 @@ export default function Body() {
     const [text1, settext1] = useState('x');
     const [text2, settext2] = useState('o');
     const classes = useStyles();
-
     const onTextChange1 = (e) => { settext1(e.target.value);  };
     const onTextChange2 = (e) => { settext2(e.target.value); };
     const UpdateNames = () => {
@@ -65,9 +65,9 @@ export default function Body() {
         </div>
         )}
         </div>
-    <div className={classes.footer} id="footer">
+    <Container className={classes.footer} id="footer">
      <p> Made by Taravat Monsef </p><p>Internet Engineering Exercise 3</p>
-    </div>
+    </Container>
     </div>
   );
 }

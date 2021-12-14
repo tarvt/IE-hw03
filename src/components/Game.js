@@ -13,26 +13,7 @@ import Button from '@mui/material/Button';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Box from '@mui/material/Box';
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'JUMP':
-      return {
-        ...state,
-        xIsNext: action.payload.step % 2 === 0,
-        history: state.history.slice(0, action.payload.step + 1),
-      };
-    case 'MOVE':
-      return {
-        ...state,
-        history: state.history.concat({
-          squares: action.payload.squares,
-        }),
-        xIsNext: !state.xIsNext,
-      };
-    default:
-      return state;
-  }
-};
+
 
 export default function Game(props) {
   // defining sizes for making the website responsive
@@ -65,7 +46,7 @@ export default function Game(props) {
         justifycontent: 'space-between'};
   };
 
-  //new game 
+  //refresh the page
   const newgame = () => {
     window.location.reload();
   };
@@ -93,14 +74,13 @@ export default function Game(props) {
   const status = winner
     ? winner === 'D'
       ? 'Draw'
-      : 'Winner is ' + winner
+      : 'Winner is ' + (winner ==='X' ? props.player1 : props.player2 )
     : 'Next player is ' + (xIsNext ? props.player1 : props.player2 );
 // this functions fills in the list of privous moves
   const moves = history.map((step, move) => {
     if (move > 0) { 
     const desc = 'Go to move #' + move;
     return (
-      
       <ListItem key={move} disablePadding>
         <ListItemButton style={{ backgroundColor: "#c2c8d1" }} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
       </ListItem>
@@ -143,7 +123,7 @@ const calculateWinner = (squares) => {
   for (let i = 0; i < winnerLines.length; i++) {
     const [a, b, c] = winnerLines[i];
     if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
-      return squares[a];
+        return squares[a];
     }
     if (!squares[a] || !squares[b] || !squares[c]) {
       isDraw = false;
@@ -151,4 +131,27 @@ const calculateWinner = (squares) => {
   }
   if (isDraw) return 'D';
   return null;
+};
+// if state changes reducer will handle the nwe state
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'JUMP':
+      return {
+        // keep the last state but change isnext and history
+        ...state,
+        xIsNext: action.payload.step % 2 === 0,
+        history: state.history.slice(0, action.payload.step + 1),
+      };
+    case 'MOVE':
+      return {
+        // keep the last state but change isnext and add to history
+        ...state,
+        history: state.history.concat({
+          squares: action.payload.squares,
+        }),
+        xIsNext: !state.xIsNext,
+      };
+    default:
+      return state;
+  }
 };
