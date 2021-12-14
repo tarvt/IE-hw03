@@ -1,4 +1,4 @@
-# Tic Toc Toe Game with React and Material-ui
+# Tic Tac Toe Game with React and Material-ui
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
