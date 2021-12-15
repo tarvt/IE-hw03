@@ -4,7 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation and Setup Instructions
 
-1)Check you have node installed, by writing the following command:
+1)Clone the repo
+
+```bash
+   git clone git@github.com:tarvt/IE-hw03.git
+```
+
+2)Check if you have node installed by writing the following command:
 
 ```bash
 node -- version
@@ -13,19 +19,19 @@ node -- version
 If you don't have node installed, you can install it here :
 [download node.js](https://nodejs.org/en/download/)
 
-2)After installing node install npm by following command:
+3)After installing node, install npm by following command:
 
 ```bash
 npm install
 ```
 
-3)Runs the app using following command:
+4)Runs the app using following command:
 
 ```bash
 npm start
 ```
 
-4)Open http://localhost:3000 to view it in the browser.
+5)Open http://localhost:3000 to view it in the browser.
 
 ## Available Scripts
 
