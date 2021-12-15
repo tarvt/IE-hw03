@@ -1,10 +1,9 @@
 # Tic Tac Toe Game with React and Material-ui
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tic-tac-toe is a two player game. The two players take turns putting marks on a 3x3 board. The player who first gets 3 of his/her marks in a row (vertically, horizontally, or diagonally) wins the game, and the other loses the game.[more information](https://en.wikipedia.org/wiki/Tic-tac-toe)
 
 ### Built With
 
-- [Next.js](https://nextjs.org/)
 - [React.js](https://reactjs.org/)
 - [Material-ui](https://mui.com/)
 
