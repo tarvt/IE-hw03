@@ -29,12 +29,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px!important',
         marginbottom: '5%',
   },
-    textf: {
-      marginleft: '10%',
-      margin: '30px auto',
-      
-      backgroundColor: 'balck',
-    }
+
   
 }));
 

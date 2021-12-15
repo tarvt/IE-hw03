@@ -10,7 +10,6 @@ export default function Square(props) {
 
 
   const handleIcon = (value) => {
-    console.log("we here1");
     if (value === 'O') {
       
       return <CircleOutlinedIcon style={{ fontSize: 50 }}/>;

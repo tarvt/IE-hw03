@@ -14,7 +14,7 @@ export default function Board(props) {
     
     return (
         <Box sx={{width: 310,height: 310,'&:hover': {opacity: [0.9, 0.8, 0.7],},}}>
-            <Grid container spacing={0} columnSpacing={{ xs: 0, sm: 1, md: 2 }}>
+            <Grid container spacing={0} >
                     {renderSquare(0)}
                     <Divider style={{ background: 'black' }} orientation="vertical" flexItem></Divider>
                     {renderSquare(1)}
