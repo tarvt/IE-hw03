@@ -1,10 +1,8 @@
-import React, { useReducer , useState } from 'react';
+import React, { useReducer , useState , Divider} from 'react';
 import Board from './Board';
 import Alert from '@mui/material/Alert';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import CloseIcon from '@mui/icons-material/Close';
 import List from '@mui/material/List';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
@@ -14,15 +12,14 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Button from '@mui/material/Button';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Box from '@mui/material/Box';
-
-
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 export default function Game(props) {
   // defining sizes for making the website responsive
   const theme = useTheme();
-  const [hide, sethide] = useState(true);
-
     const desktop = useMediaQuery(theme.breakpoints.up("lg"));
     const tablet = useMediaQuery(theme.breakpoints.up("sm"));
     const mobile = useMediaQuery(theme.breakpoints.up("xs"));
@@ -30,77 +27,50 @@ export default function Game(props) {
 
     if (desktop ) return {
       backgroundColor: '#d8e4fc', borderRadius: '10px!important', width: '60%',
-      margin: 'auto', padding: '10px 12px', display: 'flex', justifycontent: 'space-between'};
-    if (mobile || tablet ) return {backgroundColor:'#d8e4fc',
+        margin: 'auto', padding: '10px 12px', display: 'flex', justifycontent: 'space-between'
+      };
+    if ( tablet ) return {backgroundColor:'#d8e4fc',
+      width: '80%', margin: 'auto', justifycontent: 'space-between'
+    };
+    if (mobile ) return {backgroundColor:'#d8e4fc',
       width: '90%', margin: 'auto', justifycontent: 'space-between'
     };
   };
   
     const stylebrd = () => {
       if (desktop ) return {
-        width: '55%', margin: 'auto', borderradius: '10px',};
-      if (mobile || tablet ) return {
-          width: '75%',margin: 'auto',justifycontent: 'space-between'};
-  };
-  // desktop size 
-    const stylemv1 = () => {
-    if (desktop) return {
         width: '55%', margin: 'auto', borderradius: '10px',
       };
-    if (tablet || mobile) return {
-         display:'none',
-    };
+       if ( tablet ) return {
+          width: '50%',margin: 'auto'};
+      if (mobile ) return {
+          width: '75%',margin: 'auto',justifycontent: 'space-between'};
   };
-  // mobile or tabletmode
-  const stylemv2 = () => {
-    if (desktop || hide) return {display:'none'};
-    else if (tablet || mobile) return {
-      position: 'fixed',top: '0',right: '0',
-      bottom: '0',zindex: '9999 !important',width: '50%',
-      padding: '20px 0',fontsize: 10,
-      background: '#9e939d',
-      color: 'white',
-      overflowy: 'auto',opacity:'0.9',
-      transition: 'right 0.2s',
-    };
-  };
+
   const stylebtn = () => {
-    if (desktop || tablet) return {
+    if (desktop ) return {
       width: '40%',fontSize: 15 ,
     };
-      if (mobile ) return {
-        width: '40%',fontSize: 10 , zindex: '10 !important'};
+      if (mobile || tablet) return {
+        width: '43%',fontSize: 10 , zindex: '10 !important'};
   };
-  const hideindesktop = () => {
+  const styletest = () => {
     if (desktop ) return {
-      display: 'none',
-    };
-    if ( tablet ) return {
-        width: '50%',fontSize: 10 , margin:'auto' };
-     if (mobile ) return {
-        width: '75%',fontSize: 10 , margin:'auto' };
-
-  };
-  const hideinmobile = () => {
-    if (desktop ) return {
-      display:'block',
+     display: 'inline',
+      width: '400px',
+      fontSize:'1.4em'
     };
     if (mobile || tablet) return {
-        display:'none',
-    };
- };
+      display: 'inline',
+      width: '200px',
+    fontSize:'0.9em'};
+    
+  };
   //refresh the page
   const newgame = () => {
     window.location.reload();
   };
-   //close the sidebar
-  const close = () => {
-    sethide(true);
-  };
-   //open the sidebar
-  const open = () => {
-    sethide(false);
-  };
+
   const [state, dispatch] = useReducer(reducer, {
     xIsNext: true,
     history: [{ squares: Array(9).fill(null) }],
@@ -131,27 +101,45 @@ export default function Game(props) {
   const moves = history.map((step, move) => {
     if (move > 0) { 
     const desc = 'Go to move #' + move;
-    return (
+      return (
       <ListItem key={move} disablePadding>
-        <ListItemButton style={{ backgroundColor: "#c2c8d1" }} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
+        <ListItemButton sx={{ m:0.5}} onClick={() => jumpTo(move)}>{desc}</ListItemButton>  
       </ListItem>
+      
     );
     }
     return null;
   });
-  // show the list of moves
-    const movelist = () => {
-      return (
-      <div>
-     <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
-        <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
-          <Alert style={hideinmobile()}  icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
-          severity={winner ? "success" : "info"} >{status}</Alert>
-          <List style={{}}>{moves}</List>
-      </div>
-    );
+  
 
+  const [drawer, setdrawer] = React.useState({
+    left: false,
+  });
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setdrawer({ ...drawer, [anchor]: open });
   };
+  // show the list of moves
+  const tmovelist = (anchor) => (
+    <Box
+      style = {styletest()}
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+    >
+     
+    <IconButton color="primary" ><CloseIcon /></IconButton>
+      <List >{moves}</List>
+      <Button  style={stylebtn() } sx={{ m: 0.5,color:"secondary" }} variant="outlined" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
+    
+    </Box>
+  );
 
   return (
     <Box style={styleGame()}>
@@ -162,19 +150,23 @@ export default function Game(props) {
           squares={current.squares}
         ></Board>
       </Box>
-      <Box sx={{ p: 2 , m:2 }} style={stylemv1()}>
-        {movelist() }
-      </Box>
-      <Box sx={{ p: 2, m: 2 }} style={stylemv2()}>
-        <Button  endIcon={<CloseIcon />} onClick={() => close()}></Button>
-        {movelist() }
-      </Box>
-      <Box style={hideindesktop()}>
+
+      <Box style={stylebrd()}>
           <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
           severity={winner ? "success" : "info"} >{status}</Alert>
-          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" onClick={() => open()}>show<br/>moves</Button>
-          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new<br/>game</Button>
-          
+          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
+      <React.Fragment key={'left'}  >
+          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" onClick={toggleDrawer('left', true)}>show moves</Button>
+          <SwipeableDrawer
+            sx = {{width:'100px'}}
+            anchor={'left'}
+            open={drawer['left']}
+            onClose={toggleDrawer('left', false)}
+            onOpen={toggleDrawer('left', true)}
+          >
+            {tmovelist('left')}
+          </SwipeableDrawer>
+        </React.Fragment>
       </Box>
     </Box>
   );
