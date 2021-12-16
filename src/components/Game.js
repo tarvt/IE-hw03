@@ -1,4 +1,4 @@
-import React, { useReducer , useState , Divider} from 'react';
+import React, { useReducer } from 'react';
 import Board from './Board';
 import Alert from '@mui/material/Alert';
 import ListItem from '@mui/material/ListItem';
@@ -10,7 +10,6 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Button from '@mui/material/Button';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import IconButton from '@mui/material/IconButton';
@@ -38,21 +37,22 @@ export default function Game(props) {
   };
   
     const stylebrd = () => {
-      if (desktop ) return {
+      if (desktop) return {
         width: '55%', margin: 'auto', borderradius: '10px',
       };
        if ( tablet ) return {
           width: '50%',margin: 'auto'};
-      if (mobile ) return {
-          width: '75%',margin: 'auto',justifycontent: 'space-between'};
+      if (mobile) return {
+        backgroundColor:'#d8e4fc',
+         width: '75%',margin: 'auto',justifycontent: 'space-between'};
   };
 
   const stylebtn = () => {
     if (desktop ) return {
-      width: '40%',fontSize: 15 ,
+       width: '40%',fontSize: 15 ,
     };
       if (mobile || tablet) return {
-        width: '43%',fontSize: 10 , zindex: '10 !important'};
+      height:'40px', width: '40%',fontSize: 10 , zindex: '10 !important'};
   };
   const styletest = () => {
     if (desktop ) return {
@@ -154,7 +154,7 @@ export default function Game(props) {
       <Box style={stylebrd()}>
           <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
           severity={winner ? "success" : "info"} >{status}</Alert>
-          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
+          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained"  onClick={() => newgame()}>new game</Button>
       <React.Fragment key={'left'}  >
           <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" onClick={toggleDrawer('left', true)}>show moves</Button>
           <SwipeableDrawer
