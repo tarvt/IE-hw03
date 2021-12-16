@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer , useState } from 'react';
 import Board from './Board';
 import Alert from '@mui/material/Alert';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import CloseIcon from '@mui/icons-material/Close';
 import List from '@mui/material/List';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
@@ -15,40 +17,89 @@ import Box from '@mui/material/Box';
 
 
 
+
 export default function Game(props) {
   // defining sizes for making the website responsive
   const theme = useTheme();
+  const [hide, sethide] = useState(true);
+
     const desktop = useMediaQuery(theme.breakpoints.up("lg"));
     const tablet = useMediaQuery(theme.breakpoints.up("sm"));
     const mobile = useMediaQuery(theme.breakpoints.up("xs"));
     const styleGame = () => {
 
-    if (desktop  ) return {backgroundColor:'#d8e4fc',
-    borderRadius: '10px!important',
-    width: '60%',
-    margin: 'auto',
-    padding: '10px 12px',
-    display: 'flex',
-    justifycontent: 'space-between'};
-    if (mobile || tablet) return {backgroundColor:'#d8e4fc',
-    width: '90%',
-    margin: 'auto',
-    justifycontent: 'space-between'};
+    if (desktop ) return {
+      backgroundColor: '#d8e4fc', borderRadius: '10px!important', width: '60%',
+      margin: 'auto', padding: '10px 12px', display: 'flex', justifycontent: 'space-between'};
+    if (mobile || tablet ) return {backgroundColor:'#d8e4fc',
+      width: '90%', margin: 'auto', justifycontent: 'space-between'
+    };
   };
-    const styleSec = () => {
+  
+    const stylebrd = () => {
+      if (desktop ) return {
+        width: '55%', margin: 'auto', borderradius: '10px',};
+      if (mobile || tablet ) return {
+          width: '75%',margin: 'auto',justifycontent: 'space-between'};
+  };
+  // desktop size 
+    const stylemv1 = () => {
+    if (desktop) return {
+        width: '55%', margin: 'auto', borderradius: '10px',
+      };
+    if (tablet || mobile) return {
+         display:'none',
+    };
+  };
+  // mobile or tabletmode
+  const stylemv2 = () => {
+    if (desktop || hide) return {display:'none'};
+    else if (tablet || mobile) return {
+      position: 'fixed',top: '0',right: '0',
+      bottom: '0',zindex: '9999 !important',width: '50%',
+      padding: '20px 0',fontsize: 10,
+      background: '#9e939d',
+      color: 'white',
+      overflowy: 'auto',opacity:'0.9',
+      transition: 'right 0.2s',
+    };
+  };
+  const stylebtn = () => {
     if (desktop || tablet) return {
-    width: '55%',
-    margin: 'auto',
-    borderradius: '10px',};
+      width: '40%',fontSize: 15 ,
+    };
       if (mobile ) return {
-        width: '75%',
-        margin: 'auto',
-        justifycontent: 'space-between'};
+        width: '40%',fontSize: 10 , zindex: '10 !important'};
   };
+  const hideindesktop = () => {
+    if (desktop ) return {
+      display: 'none',
+    };
+    if ( tablet ) return {
+        width: '50%',fontSize: 10 , margin:'auto' };
+     if (mobile ) return {
+        width: '75%',fontSize: 10 , margin:'auto' };
 
+  };
+  const hideinmobile = () => {
+    if (desktop ) return {
+      display:'block',
+    };
+    if (mobile || tablet) return {
+        display:'none',
+    };
+ };
   //refresh the page
   const newgame = () => {
     window.location.reload();
+  };
+   //close the sidebar
+  const close = () => {
+    sethide(true);
+  };
+   //open the sidebar
+  const open = () => {
+    sethide(false);
   };
   const [state, dispatch] = useReducer(reducer, {
     xIsNext: true,
@@ -84,31 +135,51 @@ export default function Game(props) {
       <ListItem key={move} disablePadding>
         <ListItemButton style={{ backgroundColor: "#c2c8d1" }} onClick={() => jumpTo(move)}>{desc}</ListItemButton>
       </ListItem>
-
     );
     }
     return null;
   });
+  // show the list of moves
+    const movelist = () => {
+      return (
+      <div>
+     <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
+        <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
+          <Alert style={hideinmobile()}  icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
+          severity={winner ? "success" : "info"} >{status}</Alert>
+          <List style={{}}>{moves}</List>
+      </div>
+    );
+
+  };
 
   return (
     <Box style={styleGame()}>
       
-      <Box sx={{ p: 2 , m:2}} style={styleSec()}>
+      <Box sx={{ p: 2 , m:2}} style={stylebrd()}>
         <Board
           onClick={(i) => handleClick(i)}
           squares={current.squares}
         ></Board>
       </Box>
-      <Box sx={{ p: 2 , m:2 }} style={styleSec()}>
-        <Button sx={{ m: 1 }} variant="contained" endIcon={<RestartAltIcon />} onClick={() => jumpTo(0)}>restart</Button>
-        <Button sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new game</Button>
-        <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
+      <Box sx={{ p: 2 , m:2 }} style={stylemv1()}>
+        {movelist() }
+      </Box>
+      <Box sx={{ p: 2, m: 2 }} style={stylemv2()}>
+        <Button  endIcon={<CloseIcon />} onClick={() => close()}></Button>
+        {movelist() }
+      </Box>
+      <Box style={hideindesktop()}>
+          <Alert icon={winner ? <EmojiEventsIcon/> : <DirectionsRunIcon/>}
           severity={winner ? "success" : "info"} >{status}</Alert>
-        <List style={{}}>{moves}</List>
+          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" onClick={() => open()}>show<br/>moves</Button>
+          <Button style={stylebtn() } sx={{ m: 1 }} variant="contained" endIcon={<SportsEsportsIcon/>} onClick={() => newgame()}>new<br/>game</Button>
+          
       </Box>
     </Box>
   );
 }
+// a function to calculate the winner 
 const calculateWinner = (squares) => {
   const winnerLines = [
     [0, 1, 2],
